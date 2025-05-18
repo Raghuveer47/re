@@ -1,38 +1,41 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase';
+
 const Signup = () => {
-    const [name,setName] = useState('');
-    const [email,setEmail] = useState('')
-    const [password, setPassword] = useState('');
- 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-const signup = async (e)=>{
+  const signup = async (e) => {
     e.preventDefault();
-    try{
-        const usercred = await createUserWithEmailAndPassword(auth,email,password)
-        await updateProfile(usercred.user,{displayName:name})
-        alert("signup done")
-        navigate('/login')
-
-    }catch(err){
-  alert(err.message)
+    try {
+      const usercred = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(usercred.user, { displayName: name });
+      alert('Signup successful!');
+      navigate('/login');
+    } catch (err) {
+      alert(err.message);
     }
-}
+  };
 
   return (
     <>
-    <form onSubmit={signup}>
+      <form onSubmit={signup}>
         <h2>Signup</h2>
-         <input placeholder="Full Name" onChange={(e) => setName(e.target.value)} />
-      <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-        <button>signup</button>
-    </form>
+        <input placeholder="Full Name" onChange={(e) => setName(e.target.value)} required />
+        <input placeholder="Email" type="email" onChange={(e) => setEmail(e.target.value)} required />
+        <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} required />
+        <button type="submit">Signup</button>
+        <p>
+          Already have an account?{' '}
+          <Link to="/">Login</Link>
+        </p>
+      </form>
     </>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
