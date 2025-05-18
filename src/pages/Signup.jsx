@@ -31,7 +31,7 @@ const Signup = () => {
         <button type="submit">Signup</button>
         <p>
           Already have an account?{' '}
-          <Link to="/">Login</Link>
+          <Link to="/login">Login</Link>
         </p>
       </form>
     </>
