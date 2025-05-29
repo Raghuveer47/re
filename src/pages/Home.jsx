@@ -24,8 +24,8 @@ useEffect(() => {
     fetch('https://bac-770v.onrender.com/api/products')
       .then(res => res.json())
       .then(data => {
-        setProducts(data);
-        setFiltered(data);
+        setProducts(data.products);
+        setFiltered(data.products);
       });
   }, []);
 
