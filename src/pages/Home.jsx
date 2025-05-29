@@ -21,7 +21,7 @@ useEffect(() => {
 }, []);
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
+    fetch('https://bac-770v.onrender.com/api/products')
       .then(res => res.json())
       .then(data => {
         setProducts(data);
